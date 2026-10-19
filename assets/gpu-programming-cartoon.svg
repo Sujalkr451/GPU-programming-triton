@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="title description">
+  <title id="title">The kernel gremlin has a masking problem</title>
+  <desc id="description">A hand-drawn Triton kernel data-flow diagram is interrupted by an original, panicking GPU gremlin who has confused the last lane with an extra lane.</desc>
+  <defs>
+    <pattern id="paper" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="5" r="0.8" fill="#d9d6ca"/>
+      <circle cx="16" cy="17" r="0.6" fill="#d9d6ca"/>
+    </pattern>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dy="5"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".2"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M1 1l6 3.5L1 8" fill="none" stroke="#353535" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="redArrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M1 1l6 3.5L1 8" fill="none" stroke="#e3574f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="620" rx="12" fill="#f8f7f2"/>
+  <rect width="1200" height="620" rx="12" fill="url(#paper)" opacity=".5"/>
+  <path d="M28 29q4-3 10-2h1124q8 1 9 8v548q-2 8-10 8H38q-8-2-8-9z" fill="none" stroke="#4a4a46" stroke-width="2.4" stroke-linecap="round"/>
+  <text x="600" y="67" fill="#292929" font-family="Comic Sans MS, Chalkboard, cursive" font-size="31" font-weight="700" text-anchor="middle" transform="rotate(-.5 600 67)">A VERY NORMAL TRITON KERNEL</text>
+
+  <g fill="#fffef9" stroke="#393939" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" font-family="Comic Sans MS, Chalkboard, cursive" text-anchor="middle">
+    <path d="M58 145q2-3 7-3h126q4 1 4 5v65q-1 4-5 4H64q-5-1-5-5z"/>
+    <path d="M248 145q1-4 6-4h148q4 2 4 6v64q-1 5-6 5H254q-5-1-5-6z"/>
+    <path d="M455 145q2-4 7-4h170q4 1 5 6v64q-2 5-7 5H461q-5-1-6-6z"/>
+    <path d="M678 145q2-4 7-4h173q5 1 5 6v64q-2 5-7 5H684q-5-1-6-6z"/>
+    <path d="M913 145q2-4 7-4h211q5 1 5 6v64q-2 5-7 5H919q-5-1-6-6z"/>
+    <text x="126" y="183" fill="#292929" stroke="none" font-size="20">Input tensor</text>
+    <text x="326" y="173" fill="#292929" stroke="none" font-size="20">tl.arange</text>
+    <text x="326" y="197" fill="#555" stroke="none" font-size="15">lane IDs</text>
+    <text x="541" y="173" fill="#292929" stroke="none" font-size="20">tl.load</text>
+    <text x="541" y="197" fill="#e3574f" stroke="none" font-size="15">mask = ?!</text>
+    <text x="766" y="173" fill="#292929" stroke="none" font-size="20">multiply</text>
+    <text x="766" y="197" fill="#555" stroke="none" font-size="15">elementwise</text>
+    <text x="1020" y="173" fill="#292929" stroke="none" font-size="20">tl.store</text>
+    <text x="1020" y="197" fill="#388b57" stroke="none" font-size="15">output tensor</text>
+  </g>
+
+  <g fill="none" stroke="#383838" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow)">
+    <path d="M197 176q23-2 45 0"/>
+    <path d="M407 176q23-2 45 0"/>
+    <path d="M633 176q22 0 43 0"/>
+    <path d="M864 176q24 0 46 0"/>
+  </g>
+  <path d="M629 207q-7 38 12 65t36 30" fill="none" stroke="#e3574f" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#redArrow)"/>
+  <text x="650" y="281" fill="#d94d48" font-family="Comic Sans MS, Chalkboard, cursive" font-size="16" transform="rotate(10 650 281)">oops, my mask</text>
+
+  <g fill="none" stroke="#363636" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M87 284q-2-4 4-5h274q5 1 5 6v188q-2 5-7 5H94q-7-1-7-7z"/>
+    <path d="M104 309q1-3 5-3h235q5 1 5 5v144q-1 4-6 4H110q-6-1-6-6z"/>
+    <path d="M118 332h202m-202 29h202m-202 29h202m-202 29h202" stroke="#bbb7ac" stroke-width="1.4"/>
+  </g>
+  <text x="227" y="300" fill="#333" font-family="Comic Sans MS, Chalkboard, cursive" font-size="19" text-anchor="middle">GPU: 1,024 lanes, all busy</text>
+  <g font-family="Comic Sans MS, Chalkboard, cursive" font-size="16" text-anchor="middle">
+    <text x="137" y="354" fill="#555">lane 0</text>
+    <text x="207" y="354" fill="#555">lane 1</text>
+    <text x="278" y="354" fill="#555">lane 2</text>
+    <text x="137" y="383" fill="#555">lane 3</text>
+    <text x="207" y="383" fill="#555">lane 4</text>
+    <text x="278" y="383" fill="#555">lane 5</text>
+    <text x="217" y="438" fill="#777">… 1,018 more tiny workers …</text>
+  </g>
+
+  <path d="M862 306q1-4 6-4h238q6 1 6 6v125q-1 5-6 5H869q-6-1-7-7z" fill="#fffef9" stroke="#e3574f" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="983" y="336" fill="#d94d48" font-family="Comic Sans MS, Chalkboard, cursive" font-size="18" font-weight="700" text-anchor="middle">THE BUG REPORT</text>
+  <text x="887" y="370" fill="#393939" font-family="Comic Sans MS, Chalkboard, cursive" font-size="16">Expected: 1,024 values</text>
+  <text x="887" y="397" fill="#393939" font-family="Comic Sans MS, Chalkboard, cursive" font-size="16">Got: 1,025 (??)</text>
+  <path d="M1040 402q18 14 24 1" fill="none" stroke="#e3574f" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="1057" y="421" fill="#e3574f" font-family="Comic Sans MS, Chalkboard, cursive" font-size="14" text-anchor="middle">who invited lane 1024?</text>
+
+  <g filter="url(#softShadow)">
+    <path d="M441 396q-29-6-40 10-7 11 8 17l38 9m310-35q29-8 42 4 10 10-4 19l-35 15" fill="#a9cf64" stroke="#343a2c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M478 492l-7 31m211-31 12 31" fill="none" stroke="#343a2c" stroke-width="7" stroke-linecap="round"/>
+    <path d="M455 524q14-12 28 0m197 0q14-12 28 0" fill="none" stroke="#343a2c" stroke-width="6" stroke-linecap="round"/>
+    <path d="M453 341q-14-22 3-37l5-32 26 18 22-40 22 29 26-39 17 30 34-27 7 35 36-13-5 39q20 18 8 47l-8 115q-2 24-26 27l-146-1q-24-3-24-28z" fill="#b7d96c" stroke="#343a2c" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M468 293l15 8m26-36 11 19m32-34 4 22m42-19-3 20m47-4-12 20" fill="none" stroke="#e8f59b" stroke-width="5" stroke-linecap="round"/>
+    <path d="M474 335q15-12 29 0m84 0q16-12 29 0" fill="none" stroke="#343a2c" stroke-width="5" stroke-linecap="round"/>
+    <ellipse cx="490" cy="357" rx="12" ry="15" fill="#fffdf1" stroke="#343a2c" stroke-width="2.5"/>
+    <ellipse cx="602" cy="357" rx="12" ry="15" fill="#fffdf1" stroke="#343a2c" stroke-width="2.5"/>
+    <ellipse cx="494" cy="362" rx="4" ry="7" fill="#343a2c"/>
+    <ellipse cx="598" cy="362" rx="4" ry="7" fill="#343a2c"/>
+    <path d="M513 394q27-23 56 0-1 17-28 18-25-1-28-18z" fill="#633535" stroke="#343a2c" stroke-width="3"/>
+    <path d="M527 397q13-5 27 0" fill="none" stroke="#fff9dc" stroke-width="4" stroke-linecap="round"/>
+    <path d="M471 374l-13-9m157 9 13-9" stroke="#e8866b" stroke-width="5" stroke-linecap="round"/>
+    <path d="M631 324q23-5 19 15-3 15-20 5" fill="none" stroke="#f9ffff" stroke-width="4" stroke-linecap="round"/>
+    <path d="M639 341l-5 12 9-2-7 12" fill="none" stroke="#f9ffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="484" y="449" width="123" height="32" rx="7" fill="#303c46" stroke="#343a2c" stroke-width="3"/>
+    <text x="545" y="471" fill="#e3ffae" font-family="Comic Sans MS, Chalkboard, cursive" font-size="17" font-weight="700" text-anchor="middle">GPU-ish</text>
+    <path d="M434 406l-19 14m361-17 20 10" stroke="#343a2c" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <path d="M573 237q5-6 14-4h277q9 1 9 9v52q-1 8-9 8H675l-27 22 7-22h-68q-9-1-9-9z" fill="#fffef9" stroke="#353535" stroke-width="2.5" stroke-linejoin="round"/>
+  <text x="716" y="262" fill="#292929" font-family="Comic Sans MS, Chalkboard, cursive" font-size="18" font-weight="700" text-anchor="middle">“I masked the last lane!</text>
+  <text x="716" y="286" fill="#292929" font-family="Comic Sans MS, Chalkboard, cursive" font-size="18" font-weight="700" text-anchor="middle">…and then I unmasked it.”</text>
+
+  <path d="M417 549q177-8 365 0t354 0" fill="none" stroke="#8f8c82" stroke-width="1.5" stroke-linecap="round"/>
+  <text x="600" y="583" fill="#55534e" font-family="Comic Sans MS, Chalkboard, cursive" font-size="17" text-anchor="middle" transform="rotate(.4 600 583)">Parallel computing: 1,024 workers. Debugging: just you and a cold coffee.</text>
+</svg>
