@@ -1,3 +1,8 @@
+import torch
+import triton.language as tl
+import triton
+
+
 @triton.jit
 def add_relu_kernel(a_ptr, b_ptr, out_ptr, n,
                     BLOCK_SIZE: tl.constexpr):
