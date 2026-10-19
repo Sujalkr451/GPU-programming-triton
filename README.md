@@ -1,4 +1,4 @@
-GPU PROGRAMMING RELATED STUFFS HERE
+GPU PROGRAMMING 
 
 ![A GPU chip discovering an off-by-one error](assets/gpu-programming-cartoon.svg)
 
